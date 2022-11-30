@@ -51,7 +51,7 @@ macro_rules! ram_storage { (
             const BLOCK_COUNT: usize = $block_count;
             type LOOKAHEADWORDS_SIZE = $lookaheadwords_size;
 
-            fn read(&self, offset: usize, buf: &mut [u8]) -> $Result<usize> {
+            fn read(&mut self, offset: usize, buf: &mut [u8]) -> $Result<usize> {
                 let read_size: usize = Self::READ_SIZE;
                 debug_assert!(offset % read_size == 0);
                 debug_assert!(buf.len() % read_size == 0);
@@ -93,7 +93,7 @@ macro_rules! ram_storage { (
             cache_size_ty=$crate::consts::U32,
             block_size=128,
             block_count=$bytes/128,
-            lookaheadwords_size_ty=$crate::consts::U1,
+            lookaheadwords_size_ty=$crate::consts::U2,
             filename_max_plus_one_ty=$crate::consts::U256,
             path_max_plus_one_ty=$crate::consts::U256,
             result=LfsResult,
@@ -110,7 +110,7 @@ macro_rules! ram_storage { (
             cache_size_ty=$crate::consts::U32,
             block_size=128,
             block_count=8,
-            lookaheadwords_size_ty=$crate::consts::U1,
+            lookaheadwords_size_ty=$crate::consts::U2,
             filename_max_plus_one_ty=$crate::consts::U256,
             path_max_plus_one_ty=$crate::consts::U256,
             result=Result,
@@ -180,7 +180,7 @@ macro_rules! const_ram_storage { (
             const BLOCK_COUNT: usize = $block_count;
             type LOOKAHEADWORDS_SIZE = $lookaheadwords_size;
 
-            fn read(&self, offset: usize, buf: &mut [u8]) -> $Result<usize> {
+            fn read(&mut self, offset: usize, buf: &mut [u8]) -> $Result<usize> {
                 let read_size: usize = Self::READ_SIZE;
                 debug_assert!(offset % read_size == 0);
                 debug_assert!(buf.len() % read_size == 0);
@@ -221,7 +221,7 @@ macro_rules! const_ram_storage { (
             cache_size_ty=$crate::consts::U512,
             block_size=512,
             block_count=$bytes/512,
-            lookaheadwords_size_ty=$crate::consts::U1,
+            lookaheadwords_size_ty=$crate::consts::U2,
             filename_max_plus_one_ty=$crate::consts::U256,
             path_max_plus_one_ty=$crate::consts::U256,
             result=LfsResult,
